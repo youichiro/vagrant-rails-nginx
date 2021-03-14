@@ -1,4 +1,8 @@
 # vagrant-rails-nginx
+- Vagrantで仮想マシンを立ち上げる
+- docker-composeでRailsとNginxを起動する
+- `http://example.com`でNginxページを、`http://api.example.com`でRailsページを表示する
+
 
 ## 事前準備
 - VirtualBoxをインストールする
