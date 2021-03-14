@@ -2,7 +2,6 @@ version: "3.8"
 services:
   db:
     image: mysql:8.0
-    container_name: db
     ports:
       - "3306:3306"
     environment:
@@ -14,7 +13,6 @@ services:
     build:
       context: ./api
       dockerfile: docker/Dockerfile
-    container_name: api
     volumes:
       - ./api:/api
     ports:
@@ -25,6 +23,10 @@ services:
     depends_on:
       - db
     tty: true
+  nginx:
+    image: nginx:1.19.8
+    ports:
+      - "80:80"
 
 volumes:
   mysql-db:
