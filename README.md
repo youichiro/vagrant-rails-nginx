@@ -6,6 +6,9 @@
   - 参考: [Virtualboxのインストール](https://qiita.com/zaburo/items/770091883581985b1c05)
 - Vagrantをインストールする
   - `brew cask install vagrant`
+  - `vagrant plugin install vagrant-hostsupdater`
+    - ホスト名で仮想マシンにアクセスするためのプラグイン
+    - https://github.com/agiledivider/vagrant-hostsupdater
 
 ## セットアップ
 
@@ -43,3 +46,35 @@ $ docker-compose run --rm api bin/rails db:create
 ブラウザで `http://api.example.com` を開く
 
 ![image](https://user-images.githubusercontent.com/20487308/111075773-de537a00-852c-11eb-8c87-4400f5d947a0.png)
+
+
+## 説明
+### 仮想マシンのOS
+vagrantで立ち上げるOSは Ubuntu 20.04
+Vagrantfileで指定している
+
+```Vagrantfile
+  config.vm.box = "ubuntu/focal64"
+```
+
+### 複数のネットワーク・ホスト名を用意する
+vagrant-hostsupdaterをインストールすれば複数のネットワークに対してそれぞれのホスト名を割り当てることができる
+https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-adapters
+
+```Vagrantfile
+  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", ip: "192.168.33.11"
+  config.hostsupdater.aliases = {
+      '192.168.33.10' => ['example.com'],
+      '192.168.33.11' => ['api.example.com']
+  }
+```
+
+これで example.com と api.example.com からのリクエストを別々に受け取ることができる
+
+
+## TODO
+- [ ] nginxのログ
+- [ ] railsのproduction実行
+- [ ] docker-compose.ymlをdev環境とproduction環境に分ける
+- [ ] フロントエンド
