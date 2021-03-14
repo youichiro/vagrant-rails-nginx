@@ -28,6 +28,8 @@ services:
     tty: true
   nginx:
     image: nginx:1.19.8
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
     ports:
       - "80:80"
 
