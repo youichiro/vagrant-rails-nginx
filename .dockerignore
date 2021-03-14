@@ -1,0 +1,11 @@
+.git
+.bundle
+.vagrant
+.vscode
+.DS_Store
+log
+tmp
+node_modules
+vendor/bundle
+README.md
+
