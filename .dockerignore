@@ -2,8 +2,11 @@
 .vagrant
 .vscode
 .DS_Store
-log
-tmp
 node_modules
 README.md
-
+Dockerfile
+.dockerignore
+log/*
+tmp/*
+.bundle
+vendor/bundle

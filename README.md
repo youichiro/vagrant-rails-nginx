@@ -78,7 +78,6 @@ https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-ad
 
 
 ## TODO
-- [ ] nginxのログ
 - [ ] railsのproduction実行
 - [ ] docker-compose.ymlをdev環境とproduction環境に分ける
 - [ ] フロントエンド

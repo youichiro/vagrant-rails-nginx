@@ -6,6 +6,8 @@ RUN apt-get update -qq \
 WORKDIR /api
 
 COPY Gemfile Gemfile.lock ./
+RUN gem install bundler
+RUN bundle config set path vendor/bundle
 RUN bundle install
 
 EXPOSE 3000
