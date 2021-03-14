@@ -1,7 +1,7 @@
 # vagrant-rails-nginx
 - Vagrantで仮想マシンを立ち上げる
 - docker-composeでRailsとNginxを起動する
-- http://example.comでNginxページを、`http://api.example.com`でRailsページを表示する
+- http://example.comで Nginxページを、 http://api.example.com でRailsページを表示する
 
 
 ## 事前準備
@@ -43,11 +43,11 @@ $ docker-compose run --rm api bin/rails db:create
 ```
 
 ## ブラウザで表示する
-ブラウザで `http://example.com` を開く
+ブラウザで http://example.com を開く
 
 ![image](https://user-images.githubusercontent.com/20487308/111075735-bd8b2480-852c-11eb-88f0-7c14c8a93041.png)
 
-ブラウザで `http://api.example.com` を開く
+ブラウザで http://api.example.com を開く
 
 ![image](https://user-images.githubusercontent.com/20487308/111075773-de537a00-852c-11eb-8c87-4400f5d947a0.png)
 
@@ -62,7 +62,7 @@ Vagrantfileで指定している
 ```
 
 ### 複数のネットワーク・ホスト名を用意する
-vagrant-hostsupdaterをインストールすれば複数のネットワークに対してそれぞれのホスト名を割り当てることができる
+vagrant-hostsupdaterをインストールすれば複数のネットワークに対してそれぞれのホスト名を割り当てることができる<br>
 https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-adapters
 
 ```Vagrantfile
