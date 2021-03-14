@@ -36,10 +36,10 @@ $ docker-compose run --rm api bin/rails db:create
 ```
 
 ## ブラウザで表示する
-`http://example.com`
+ブラウザで `http://example.com` を開く
 
 ![image](https://user-images.githubusercontent.com/20487308/111075735-bd8b2480-852c-11eb-88f0-7c14c8a93041.png)
 
-`http://api.example.com`
+ブラウザで `http://api.example.com` を開く
 
 ![image](https://user-images.githubusercontent.com/20487308/111075773-de537a00-852c-11eb-8c87-4400f5d947a0.png)
