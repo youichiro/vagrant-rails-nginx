@@ -4,10 +4,6 @@ sudo su
 apt-get update
 apt-get -y upgrade
 
-# firewall
-ufw enable
-ufw allow http
-
 # install docker
 apt-get update
 apt-get install -y \
@@ -24,7 +20,6 @@ echo \
 apt-get update
 apt-get install -y docker-ce docker-ce-cli containerd.io
 apt-get install docker-ce=5:20.10.5~3-0~ubuntu-focal docker-ce-cli=5:20.10.5~3-0~ubuntu-focal containerd.io
-docker run hello-world
 
 # install docker-compose
 curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -32,7 +27,5 @@ chmod +x /usr/local/bin/docker-compose
 ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose --version
 
-# git clone
 mkdir /var/app
-cd /var/app
 
