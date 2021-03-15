@@ -85,7 +85,8 @@ https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-ad
 - `nginx/conf.d/api.conf`を変更
 
 ## TODO
-- [ ] railsのproduction実行
+- [ ] ログ
+- [x] railsのproduction実行
 - [ ] docker-compose.ymlをdev環境とproduction環境に分ける
 - [ ] フロントエンド
 - [ ] https対応
