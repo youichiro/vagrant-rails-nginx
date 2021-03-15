@@ -1,10 +1,12 @@
-## log
+## rails new
 
 ```bash
 $ rails new . -d mysql -T --api
 ```
 
-condif/database.yml
+## DBの設定
+
+`condif/database.yml`
 
 ```diff
  default: &default
@@ -34,7 +36,16 @@ condif/database.yml
 +  password:
 ```
 
-config/application.rb
+## DBを作成
+
+```bash
+$ docker-compose run --rm api bin/rails db:create
+$ docker-compose run --rm -e RAILS_ENV=production api bin/rails db:create
+```
+
+## 許可するホストを指定
+
+`config/application.rb`
 
 ```diff
  // ...
@@ -50,7 +61,9 @@ config/application.rb
  end
 ```
 
-config/puma.rb
+## pumaの設定
+
+`config/puma.rb`
 
 ```diff
 max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
@@ -67,4 +80,13 @@ port ENV.fetch("PORT") { 3000 }
 plugin :tmp_restart
 ```
 
+## scaffold
 
+```bash
+$ docker-compose run --rm api bin/rails g scaffold user name:string -T
+$ docker-compose run --rm api bin/rails db:migrate
+$ docker-compose run --rm -e RAILS_ENV=production api bin/rails db:migrate
+
+$ docker-compose run --rm api bin/rails db:seed
+$ docker-compose run --rm -e RAILS_ENV=production api bin/rails db:seed
+```
