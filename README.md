@@ -40,6 +40,7 @@ $ cd vagrant-rails-nginx
 $ docker-compose build
 $ docker-compose up -d
 $ docker-compose run --rm api bin/rails db:create
+$ docker-compose run --rm api bin/rails db:create RAILS_ENV=production
 ```
 
 ## ブラウザで表示する

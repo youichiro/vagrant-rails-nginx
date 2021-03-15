@@ -35,5 +35,6 @@ module Backend
     config.api_only = true
 
     config.hosts << 'api'
+    config.hosts << 'api.example.com'
   end
 end
