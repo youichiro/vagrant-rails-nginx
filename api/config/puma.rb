@@ -4,9 +4,13 @@ threads min_threads_count, max_threads_count
 
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
-environment ENV.fetch("RAILS_ENV") { "development" }
+rails_env = ENV.fetch("RAILS_ENV") { "development" }
+environment rails_env
 
-port ENV.fetch("PORT") { 3000 }
-
+if rails_env == 'production'
+  bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
+elsif
+  port ENV.fetch("PORT") { 3000 }
+end
 
 plugin :tmp_restart

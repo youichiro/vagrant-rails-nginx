@@ -39,8 +39,9 @@ $ cd vagrant-rails-nginx
 # docker-composeを起動する
 $ docker-compose build
 $ docker-compose up -d
-$ docker-compose run --rm api bin/rails db:create
 $ docker-compose run --rm api bin/rails db:create RAILS_ENV=production
+$ docker-compose run --rm api bin/rails db:migrate RAILS_ENV=production
+$ docker-compose run --rm api bin/rails db:seed RAILS_ENV=production
 ```
 
 ## ブラウザで表示する

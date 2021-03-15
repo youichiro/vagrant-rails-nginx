@@ -36,6 +36,5 @@ module Backend
 
     config.hosts << 'api'
     config.hosts << 'api.example.com'
-    config.hosts << 'localhost'
   end
 end
