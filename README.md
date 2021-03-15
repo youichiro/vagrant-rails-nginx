@@ -79,10 +79,6 @@ https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-ad
 これで example.com と api.example.com からのリクエストを別々に受け取ることができる
 
 
-### production環境
-- `api/config/puma/production.rb`を作成
-- `docker-compose run --rm api rails s -e production`
-- `nginx/conf.d/api.conf`を変更
 
 ## TODO
 - [ ] ログ
