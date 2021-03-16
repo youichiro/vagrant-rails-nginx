@@ -5,6 +5,7 @@ services:
     ports:
       - 3306:3306
     environment:
+      MYSQL_DATABASE: api_production
       MYSQL_USER: ${API_DATABASE_USER}
       MYSQL_PASSWORD: ${API_DATABASE_PASSWORD}
     volumes:
