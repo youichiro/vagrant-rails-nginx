@@ -17,31 +17,17 @@ services:
       dockerfile: docker/Dockerfile
     volumes:
       - ./api:/api
-      - tmp-data:/api/tmp
-      - log-data:/api/log
       - bundle-data:/api/vendor/bundle
     ports:
       - 3000:3000
     environment:
       MYSQL_HOST: 'db'
       MYSQL_PORT: 3306
-    command: "bin/rails s -e production"
+    command: "bin/rails s"
     depends_on:
       - db
     tty: true
-  nginx:
-    image: nginx:1.19.8
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - tmp-data:/api/tmp
-    ports:
-      - 80:80
-    depends_on:
-      - api
 
 volumes:
   mysql-data:
-  tmp-data:
-  log-data:
   bundle-data:
