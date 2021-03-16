@@ -10,14 +10,13 @@ default: &default
 
 development:
   <<: *default
-  database: backend_development
+  database: api_development
 
 test:
   <<: *default
-  database: backend_test
+  database: api_test
 
 production:
   <<: *default
-  database: backend_production
-  username: root
-  password:
+  database: api_production
+  password: <%= ENV.fetch("API_DATABASE_PASSWORD") %>
