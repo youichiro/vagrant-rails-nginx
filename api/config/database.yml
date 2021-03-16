@@ -19,4 +19,5 @@ test:
 production:
   <<: *default
   database: api_production
+  username: <%= ENV.fetch("API_DATABASE_USER") %>
   password: <%= ENV.fetch("API_DATABASE_PASSWORD") %>
