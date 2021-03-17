@@ -37,11 +37,10 @@ $ git clone https://github.com/youichiro/vagrant-rails-nginx.git
 $ cd vagrant-rails-nginx
 
 # docker-composeを起動する
-$ docker-compose build
-$ docker-compose up -d
-$ docker-compose run --rm api bin/rails db:create RAILS_ENV=production
-$ docker-compose run --rm api bin/rails db:migrate RAILS_ENV=production
-$ docker-compose run --rm api bin/rails db:seed RAILS_ENV=production
+$ docker-compose -f docker-compose.prod.yml build
+$ docker-compose -f docker-compose.prod.yml up -d
+$ docker-compose -f docker-compose.prod.yml exec api bin/rails db:migrate
+$ docker-compose -f docker-compose.prod.yml exec api bin/rails db:seed
 ```
 
 ## ブラウザで表示する
@@ -56,7 +55,7 @@ $ docker-compose run --rm api bin/rails db:seed RAILS_ENV=production
 
 ## 説明
 ### 仮想マシンのOS
-vagrantで立ち上げるOSは Ubuntu 20.04
+vagrantで立ち上げるOSは Ubuntu 20.04 LTS
 Vagrantfileで指定している
 
 ```Vagrantfile
@@ -79,10 +78,25 @@ https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-ad
 これで example.com と api.example.com からのリクエストを別々に受け取ることができる
 
 
+### 開発環境と本番環境
+開発環境では`docker-compose.yml`、本番環境では`docker-compose.prod.yml`を使用する
+
+開発環境
+- 起動するコンテナはdbとapi
+- railsはdevelopmentモードで3000番ポートで起動する
+- 起動コマンドは`docker-compose up -d`
+
+本番環境
+- 起動するコンテナはdbとapiとnginx
+- railsはproductionモードでソケットで起動する
+- 起動コマンドは`docker-compose -f docker-compose.prod.yml up -d`
+
+||開発環境|本番環境|
+|---|---|---|
+|起動するコンテナ|db, api|db, api, nginx|
+|DBのパスワード|無し|有り|
+|railsの起動|developmentモードで3000番ポートで起動|productionモードでソケットで起動|
+|起動コマンド|`docker-compose up -d`|`docker-compose -f docker-compose.prod.yml up -d`|
 
 ## TODO
-- [ ] ログ
-- [x] railsのproduction実行
-- [ ] docker-compose.ymlをdev環境とproduction環境に分ける
-- [ ] フロントエンド
 - [ ] https対応
