@@ -1,7 +1,7 @@
 # vagrant-rails-nginx
 - Vagrantで仮想マシンを立ち上げる
 - docker-composeでRailsとNginxを起動する
-- http://example.comで Nginxページを、 http://api.example.com でRailsページを表示する
+- http://example.com でNginxページを、 http://api.example.com でRailsページを表示する
 
 
 ## 事前準備
@@ -81,16 +81,6 @@ https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-ad
 ### 開発環境と本番環境
 開発環境では`docker-compose.yml`、本番環境では`docker-compose.prod.yml`を使用する
 
-開発環境
-- 起動するコンテナはdbとapi
-- railsはdevelopmentモードで3000番ポートで起動する
-- 起動コマンドは`docker-compose up -d`
-
-本番環境
-- 起動するコンテナはdbとapiとnginx
-- railsはproductionモードでソケットで起動する
-- 起動コマンドは`docker-compose -f docker-compose.prod.yml up -d`
-
 ||開発環境|本番環境|
 |---|---|---|
 |起動するコンテナ|db, api|db, api, nginx|
@@ -98,5 +88,6 @@ https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-ad
 |railsの起動|developmentモードで3000番ポートで起動|productionモードでソケットで起動|
 |起動コマンド|`docker-compose up -d`|`docker-compose -f docker-compose.prod.yml up -d`|
 
-## TODO
-- [ ] https対応
+### HTTPS対応
+この記事を参考にする
+- [Ubuntu 20.04でLet’s Encryptを使用してNginxを保護する方法](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04-ja)
