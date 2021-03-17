@@ -40,5 +40,7 @@ services:
       - api
 
 volumes:
+  mysql-data:
+  bundle-data:
   tmp-data:
   log-data:

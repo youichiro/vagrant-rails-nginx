@@ -1,8 +1,7 @@
-## version
-- ruby 2.7.1
-- rails 6.0.3
+# ログ
+Railsアプリケーションの作成・設定の変更ログ
 
-## rails new
+## プロジェクトの作成
 
 ```bash
 $ rails new . -d mysql -T --api
@@ -12,85 +11,94 @@ $ rails new . -d mysql -T --api
 
 `condif/database.yml`
 
-```diff:condif/database.yml
- default: &default
-   adapter: mysql2
-   encoding: utf8mb4
-   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-   username: root
-   password:
--  host: localhost
-+  host: <%= ENV.fetch("MYSQL_HOST") { "localhost" } %>
-+  port: <%= ENV.fetch("MYSQL_POST") { 3306 } %>
+```diff
+  default: &default
+    adapter: mysql2
+    encoding: utf8mb4
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    username: root
+    password:
+-   host: localhost
++   host: <%= ENV.fetch("MYSQL_HOST") { "localhost" } %>
++   port: <%= ENV.fetch("MYSQL_POST") { 3306 } %>
 
- development:
-   <<: *default
-   database: api_development
+  development:
+    <<: *default
+    database: api_development
 
- test:
-   <<: *default
-   database: api_test
+  test:
+    <<: *default
+    database: api_test
 
- production:
-   <<: *default
-   database: api_production
--  username: backend
-+  username: <%= ENV.fetch("API_DATABASE_USER") %>
--  password: <%= ENV["API_DATABASE_PASSWORD"] %>
-+  password: <%= ENV.fetch("API_DATABASE_PASSWORD") %>
+  production:
+    <<: *default
+    database: api_production
+-   username: backend
++   username: <%= ENV.fetch("API_DATABASE_USER") %>
+-   password: <%= ENV["API_DATABASE_PASSWORD"] %>
++   password: <%= ENV.fetch("API_DATABASE_PASSWORD") %>
 ```
 
-## DBを作成
+## scaffoldの実行
 
 ```bash
-$ docker-compose run --rm api bin/rails db:create
-$ docker-compose run --rm -e RAILS_ENV=production api bin/rails db:create
+$ docker-compose run --rm api bin/rails g scaffold user name:string -T
 ```
 
-## 許可するホストを指定
+
+## DBの初期コマンド
+
+```bash
+# 開発環境
+$ docker-compose run --rm api bin/rails db:create
+$ docker-compose run --rm api bin/rails db:migrate
+$ docker-compose run --rm api bin/rails db:seed
+
+# 本番環境
+$ docker-compose -f docker-compose.prod.yml run --rm api bin/rails db:migrate
+$ docker-compose -f docker-compose.prod.yml run --rm api bin/rails db:seed
+```
+
+## 許可するホストの指定
 
 `config/application.rb`
 
 ```diff
- // ...
+  // ...
 
- module Backend
-   class Application < Rails::Application
-     config.load_defaults 6.1
-     config.api_only = true
+  module Backend
+    class Application < Rails::Application
+      config.load_defaults 6.1
+      config.api_only = true
 
-+    config.hosts << 'api'
-+    config.hosts << 'api.example.com'
-   end
- end
++     config.hosts << 'api'
++     config.hosts << 'api.example.com'
+    end
+  end
 ```
 
 ## pumaの設定
+develomentモードなら3000番ポートで起動し、productionモードならソケットで起動する
 
 `config/puma.rb`
 
 ```diff
-max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
-min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
-threads min_threads_count, max_threads_count
+  max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
+  min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
+  threads min_threads_count, max_threads_count
 
-pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
+  pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
-environment ENV.fetch("RAILS_ENV") { "development" }
+- environment ENV.fetch("RAILS_ENV") { "development" }
++ rails_env = ENV.fetch("RAILS_ENV") { "development" }
++ environment rails_env
 
-port ENV.fetch("PORT") { 3000 }
+- port ENV.fetch("PORT") { 3000 }
++ if rails_env == 'production'
++   bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
++ elsif
++   port ENV.fetch("PORT") { 3000 }
++ end
 
-
-plugin :tmp_restart
-```
-
-## scaffold
-
-```bash
-$ docker-compose run --rm api bin/rails g scaffold user name:string -T
-$ docker-compose run --rm api bin/rails db:migrate
-$ docker-compose run --rm -e RAILS_ENV=production api bin/rails db:migrate
-
-$ docker-compose run --rm api bin/rails db:seed
-$ docker-compose run --rm -e RAILS_ENV=production api bin/rails db:seed
+  plugin :tmp_restart
 ```
