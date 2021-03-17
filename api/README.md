@@ -1,3 +1,7 @@
+## version
+- ruby 2.7.1
+- rails 6.0.3
+
 ## rails new
 
 ```bash
@@ -8,7 +12,7 @@ $ rails new . -d mysql -T --api
 
 `condif/database.yml`
 
-```diff
+```diff:condif/database.yml
  default: &default
    adapter: mysql2
    encoding: utf8mb4
@@ -21,19 +25,19 @@ $ rails new . -d mysql -T --api
 
  development:
    <<: *default
-   database: backend_development
+   database: api_development
 
  test:
    <<: *default
-   database: backend_test
+   database: api_test
 
  production:
    <<: *default
-   database: backend_production
+   database: api_production
 -  username: backend
-+  username: root
--  password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
-+  password:
++  username: <%= ENV.fetch("API_DATABASE_USER") %>
+-  password: <%= ENV["API_DATABASE_PASSWORD"] %>
++  password: <%= ENV.fetch("API_DATABASE_PASSWORD") %>
 ```
 
 ## DBを作成
