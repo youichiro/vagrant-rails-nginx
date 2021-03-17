@@ -42,7 +42,7 @@ $ rails new . -d mysql -T --api
 ## scaffoldの実行
 
 ```bash
-$ docker-compose run --rm api bin/rails g scaffold user name:string -T
+$ docker-compose exec api bin/rails g scaffold user name:string -T
 ```
 
 
@@ -50,16 +50,17 @@ $ docker-compose run --rm api bin/rails g scaffold user name:string -T
 
 ```bash
 # 開発環境
-$ docker-compose run --rm api bin/rails db:create
-$ docker-compose run --rm api bin/rails db:migrate
-$ docker-compose run --rm api bin/rails db:seed
+$ docker-compose exec api bin/rails db:create
+$ docker-compose exec api bin/rails db:migrate
+$ docker-compose exec api bin/rails db:seed
 
 # 本番環境
-$ docker-compose -f docker-compose.prod.yml run --rm api bin/rails db:migrate
-$ docker-compose -f docker-compose.prod.yml run --rm api bin/rails db:seed
+$ docker-compose -f docker-compose.prod.yml exec api bin/rails db:migrate
+$ docker-compose -f docker-compose.prod.yml exec api bin/rails db:seed
 ```
 
 ## 許可するホストの指定
+アクセスを許可するホストを指定する必要がある
 
 `config/application.rb`
 
@@ -71,7 +72,6 @@ $ docker-compose -f docker-compose.prod.yml run --rm api bin/rails db:seed
       config.load_defaults 6.1
       config.api_only = true
 
-+     config.hosts << 'api'
 +     config.hosts << 'api.example.com'
     end
   end
