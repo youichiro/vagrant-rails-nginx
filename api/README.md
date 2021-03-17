@@ -34,8 +34,8 @@ $ rails new . -d mysql -T --api
     <<: *default
     database: api_production
 -   username: backend
-+   username: <%= ENV.fetch("API_DATABASE_USER") %>
 -   password: <%= ENV["API_DATABASE_PASSWORD"] %>
++   username: <%= ENV.fetch("API_DATABASE_USER") %>
 +   password: <%= ENV.fetch("API_DATABASE_PASSWORD") %>
 ```
 
