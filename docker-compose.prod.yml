@@ -21,7 +21,7 @@ services:
     volumes:
       - ./api:/api
       - prod-bundle-data:/api/vendor/bundle
-      - prod-tmp-shaer:/api/tmp
+      - prod-tmp-share:/api/tmp
       - prod-log-data:/api/log
     environment:
       MYSQL_HOST: 'db'
