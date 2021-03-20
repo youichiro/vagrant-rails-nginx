@@ -27,6 +27,8 @@ services:
       MYSQL_HOST: 'db'
       MYSQL_PORT: 3306
       RAILS_ENV: 'production'
+      RAILS_LOG_TO_STDOUT: 'yes'  # ログを標準出力する
+      RAILS_REPORT_FULL_ERRORS: 'yes'  # デバッグ用にエラー情報を表示する(本番はこの環境変数を削除する)
     env_file: .env
     command: "bin/rails s"
     depends_on:
