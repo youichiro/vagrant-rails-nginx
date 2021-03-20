@@ -57,3 +57,4 @@ volumes:
   prod-bundle-data:
   prod-log-data:
   prod-tmp-share:
+  prod-dist-share:
