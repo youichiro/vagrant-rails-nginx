@@ -28,6 +28,17 @@ services:
     depends_on:
       - db
     tty: true
+  client:
+    build:
+      context: ./client
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./client:/client
+    ports:
+      - 8080:8080
+    command: "npm run serve"
+    depends_on:
+      - api
 
 volumes:
   dev-mysql-data:
