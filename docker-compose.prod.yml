@@ -35,6 +35,8 @@ services:
     build:
       context: ./client
       dockerfile: docker/Dockerfile.prod
+      args:
+        VUE_APP_API_URL: ${VUE_APP_API_URL}
     volumes:
       - prod-dist-share:/client/dist
   nginx:
