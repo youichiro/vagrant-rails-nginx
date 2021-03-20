@@ -44,9 +44,11 @@ $ docker-compose -f docker-compose.prod.yml exec api bin/rails db:seed
 
 ## ブラウザで表示する
 ブラウザで http://example.com を開くとVue.jsのページが表示され、さらにRails APIを叩いた結果が表示される
+
 ![image](https://user-images.githubusercontent.com/20487308/111873620-8e652f00-89d4-11eb-9cd0-714b39ceab0d.png)
 
 ブラウザで http://api.example.com/users を開くとRails APIのレスポンスデータが表示される
+
 ![image](https://user-images.githubusercontent.com/20487308/111873621-90c78900-89d4-11eb-9d60-f6309cb6531f.png)
 
 ## 説明
