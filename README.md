@@ -88,6 +88,12 @@ https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-ad
 |railsの起動|developmentモードで3000番ポートで起動|productionモードでソケットで起動|
 |起動コマンド|`docker-compose up -d`|`docker-compose -f docker-compose.prod.yml up -d`|
 
+
+### 秘匿情報
+このレポジトリでは`.env`を公開しているが、本当はgitignoreして公開しないようにする
+Railsの秘匿情報の復号化に使用する`RAILS_MASTER_KEY`やDBのパスワードなどが記載されているため
+
+
 ### HTTPS対応
 この記事を参考にする
 - [Ubuntu 20.04でLet’s Encryptを使用してNginxを保護する方法](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04-ja)
