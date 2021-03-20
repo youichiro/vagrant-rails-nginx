@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Hello World!</h1>
+    <h1>Users</h1>
     <ul>
       <li v-for="user in users" :key="user.id">
         {{ user.name }}
@@ -20,10 +20,9 @@ export default {
     }
   },
   mounted () {
-    // axios.defaults.headers.common['Content-Type'] = 'application/json';
     axios
       .get('http://localhost:3000/users')
-      .then(response => this.users = response)
+      .then(response => this.users = response.data)
   }
 }
 </script>
