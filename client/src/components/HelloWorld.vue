@@ -20,8 +20,9 @@ export default {
     }
   },
   mounted () {
+    const api_url = process.env.VUE_APP_API_URL || 'http://localhost:3000' + '/users'
     axios
-      .get('http://localhost:3000/users')
+      .get(api_url)
       .then(response => this.users = response.data)
   }
 }

@@ -37,8 +37,6 @@ services:
     ports:
       - 8080:8080
     command: "npm run serve"
-    depends_on:
-      - api
 
 volumes:
   dev-mysql-data:
