@@ -35,8 +35,8 @@ $ rails new . -d mysql -T --api
     database: api_production
 -   username: backend
 -   password: <%= ENV["API_DATABASE_PASSWORD"] %>
-+   username: <%= ENV.fetch("API_DATABASE_USER") %>
-+   password: <%= ENV.fetch("API_DATABASE_PASSWORD") %>
++   username: <%= ENV.fetch("API_DATABASE_USER") { "" }%>
++   password: <%= ENV.fetch("API_DATABASE_PASSWORD") { "" } %>
 ```
 
 ## scaffoldの実行
@@ -59,23 +59,6 @@ $ docker-compose -f docker-compose.prod.yml exec api bin/rails db:migrate
 $ docker-compose -f docker-compose.prod.yml exec api bin/rails db:seed
 ```
 
-## 許可するホストの指定
-アクセスを許可するホストを指定する必要がある
-
-`config/application.rb`
-
-```diff
-  // ...
-
-  module Backend
-    class Application < Rails::Application
-      config.load_defaults 6.1
-      config.api_only = true
-
-+     config.hosts << 'api.example.com'
-    end
-  end
-```
 
 ## pumaの設定
 develomentモードなら3000番ポートで起動し、productionモードならソケットで起動する
@@ -101,4 +84,21 @@ develomentモードなら3000番ポートで起動し、productionモードな�
 + end
 
   plugin :tmp_restart
+```
+
+
+## CORSの設定
+- Gemfileの`rack-cors`の行のコメントを外して`bin/bundle install`する
+- `cors.rb`を編集して、許可するホストを環境変数で指定する
+
+```ruby:api/config/initializers/cors.rb
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins ENV.fetch("RAILS_ALLOW_ORIGIN")
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+  end
+end
 ```
