@@ -32,6 +32,8 @@ services:
     build:
       context: ./client
       dockerfile: docker/Dockerfile
+    environment:
+      VUE_APP_API_URL: 'http://localhost:3000'
     volumes:
       - ./client:/client
     ports:
