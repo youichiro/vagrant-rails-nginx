@@ -21,7 +21,7 @@ services:
     volumes:
       - ./api:/api
       - prod-bundle-data:/api/vendor/bundle
-      - prod-tmp-data:/api/tmp
+      - prod-tmp-shaer:/api/tmp
       - prod-log-data:/api/log
     environment:
       MYSQL_HOST: 'db'
@@ -31,19 +31,27 @@ services:
     command: "bin/rails s"
     depends_on:
       - db
+  client:
+    build:
+      context: ./client
+      dockerfile: docker/Dockerfile.prod
+    volumes:
+      - prod-dist-share:/client/dist
   nginx:
     image: nginx:1.19.8
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - prod-tmp-data:/api/tmp
+      - prod-tmp-share:/api/tmp
+      - prod-dist-share:/client/dist
     ports:
       - 80:80
     depends_on:
       - api
+      - client
 
 volumes:
   prod-mysql-data:
   prod-bundle-data:
-  prod-tmp-data:
   prod-log-data:
+  prod-tmp-share:

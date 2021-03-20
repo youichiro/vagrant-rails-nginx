@@ -1,0 +1,10 @@
+FROM node:15.12.0-buster-slim as build
+
+WORKDIR /client
+
+COPY . .
+RUN npm install
+RUN npm run build
+
+FROM node:15.12.0-buster-slim as prod
+COPY --from=build /client/dist /client/dist
