@@ -1,19 +1,14 @@
-# client
 
-## Project setup
-```
-npm install
-```
+```bash
+$ vue create client
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Vue CLI v4.5.12
+? Please pick a preset: Manually select features
+? Check the features needed for your project: Choose Vue version
+? Choose a version of Vue.js that you want to start the project with 2.x
+? Where do you prefer placing config for Babel, ESLint, etc.? In dedicated config files
+? Save this as a preset for future projects? No
 
-### Compiles and minifies for production
+$ cd client
+$ npm install axios
 ```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
