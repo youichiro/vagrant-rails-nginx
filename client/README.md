@@ -3,7 +3,7 @@ Vueアプリケーションの作成・設定のログを残す
 
 ## プロジェクトの作成
 
-```bash
+```
 $ vue create client
 
 Vue CLI v4.5.12
