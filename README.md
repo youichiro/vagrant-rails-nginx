@@ -90,7 +90,7 @@ https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-ad
 
 
 ### 秘匿情報
-このレポジトリでは`.env`を公開しているが、本当はgitignoreして公開しないようにする
+このレポジトリでは`.env`を公開しているが、本当はgitignoreして公開しないようにする必要がある<br>
 Railsの秘匿情報の復号化に使用する`RAILS_MASTER_KEY`やDBのパスワードなどが記載されているため
 
 
