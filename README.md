@@ -1,4 +1,4 @@
-# vagrant-rails-nginx
+# vagrant-rails-vue-nginx
 docker-composeで Rails API + Vue.js の開発環境・本番環境を構築するためのサンプルコード
 Vagrantで仮想サーバを立ち上げて動作確認できるようにしている
 
