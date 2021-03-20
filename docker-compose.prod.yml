@@ -19,7 +19,12 @@ services:
       context: ./api
       dockerfile: docker/Dockerfile
     volumes:
-      - ./api:/api
+      - ./api/app:/api/app
+      - ./api/bin:/api/bin
+      - ./api/config:/api/config
+      - ./api/db:/api/db
+      - ./api/lib:/api/lib
+      - ./api/Gemfile:/api/Gemfile
       - prod-bundle-data:/api/vendor/bundle
       - prod-tmp-share:/api/tmp
       - prod-log-data:/api/log
