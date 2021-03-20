@@ -2,8 +2,6 @@
 docker-composeで Rails API + Vue.js の開発環境・本番環境を構築するためのサンプルコード
 Vagrantで仮想サーバを立ち上げて動作確認できるようにしている
 
-全体像
-
 ![image](https://user-images.githubusercontent.com/20487308/111879864-941a3f00-89eb-11eb-9b35-5c62b4f786a9.png)
 
 ## 事前準備
