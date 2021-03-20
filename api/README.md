@@ -45,6 +45,14 @@ $ rails new . -d mysql -T --api
 $ docker-compose exec api bin/rails g scaffold user name:string -T
 ```
 
+## 初期データの作成
+
+```ruby:api/db/seed.rb
+User.create!(name: 'ほげ太郎1')
+User.create!(name: 'ほげ太郎2')
+User.create!(name: 'ほげ太郎3')
+```
+
 
 ## DBの初期コマンド
 

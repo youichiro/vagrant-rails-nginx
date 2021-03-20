@@ -1,7 +1,6 @@
 # vagrant-rails-nginx
-- Vagrantで仮想マシンを立ち上げる
-- docker-composeでRailsとNginxを起動する
-- http://example.com でNginxページを、 http://api.example.com でRailsページを表示する
+docker-composeで Rails API + Vue.js の開発環境・本番環境を構築するためのサンプルコード
+Vagrantで仮想サーバを立ち上げて動作確認できるようにしている
 
 
 ## 事前準備
@@ -44,14 +43,11 @@ $ docker-compose -f docker-compose.prod.yml exec api bin/rails db:seed
 ```
 
 ## ブラウザで表示する
-ブラウザで http://example.com を開く
+ブラウザで http://example.com を開くとVue.jsのページが表示され、さらにRails APIを叩いた結果が表示される
+![image](https://user-images.githubusercontent.com/20487308/111873620-8e652f00-89d4-11eb-9cd0-714b39ceab0d.png)
 
-![image](https://user-images.githubusercontent.com/20487308/111075735-bd8b2480-852c-11eb-88f0-7c14c8a93041.png)
-
-ブラウザで http://api.example.com を開く
-
-![image](https://user-images.githubusercontent.com/20487308/111075773-de537a00-852c-11eb-8c87-4400f5d947a0.png)
-
+ブラウザで http://api.example.com/users を開くとRails APIのレスポンスデータが表示される
+![image](https://user-images.githubusercontent.com/20487308/111873621-90c78900-89d4-11eb-9d60-f6309cb6531f.png)
 
 ## 説明
 ### 仮想マシンのOS
@@ -83,10 +79,12 @@ https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-ad
 
 ||開発環境|本番環境|
 |---|---|---|
-|起動するコンテナ|db, api|db, api, nginx|
-|DBのパスワード|無し|有り|
-|railsの起動|developmentモードで3000番ポートで起動|productionモードでソケットで起動|
+|起動するコンテナ|db, api, client|db, api, client, nginx|
 |起動コマンド|`docker-compose up -d`|`docker-compose -f docker-compose.prod.yml up -d`|
+|URL|vue → `http://localhost:8080`<br>rails → `http://localhost:3000`|vue → `http://example.com`<br>rails → `http://api.example.com/users`|
+|DBのパスワード|無し|有り|
+|Railsの起動|developmentモードで3000番ポートで起動|productionモードでソケットで起動|
+|Vueページの表示|`npm run serve`の結果|`npm run build`の結果|
 
 
 ### 秘匿情報
