@@ -24,6 +24,7 @@ services:
     environment:
       MYSQL_HOST: 'db'
       MYSQL_PORT: 3306
+      RAILS_ALLOW_ORIGIN: 'http://localhost:8080'
     command: "bin/rails s -b 0.0.0.0"
     depends_on:
       - db
