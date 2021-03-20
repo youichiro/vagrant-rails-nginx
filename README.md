@@ -89,7 +89,88 @@ https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-ad
 |Vueページの表示|`npm run serve`の結果|`npm run build`の結果|
 
 
-### 秘匿情報
+### コンテナ間のファイルの共有
+nginxコンテナでリクエストを受けてRails及びVueの結果を返すようにしている<br>
+そのためにはnginxコンテナ内にpumaのソケットファイル及びVueのビルドファイルを共有する必要がある
+
+Railsの場合はpumaのソケットファイルをnginxコンテナに共有する
+
+```yml:docker-compose.prod.yml
+  # ...
+  api:
+    build:
+      context: ./api
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./api:/api
+      - prod-bundle-data:/api/vendor/bundle
+      - prod-tmp-share:/api/tmp  # ← tmpの中身をvolume化する
+      - prod-log-data:/api/log
+    environment:
+      MYSQL_HOST: 'db'
+      MYSQL_PORT: 3306
+      RAILS_ENV: 'production'
+    env_file: .env
+    command: "bin/rails s"
+    depends_on:
+      - db
+  # ...
+  nginx:
+    image: nginx:1.19.8
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - prod-tmp-share:/api/tmp  # ← apiコンテナのtmpの中身を/api/tmpに共有する
+      - prod-dist-share:/client/dist
+    ports:
+      - 80:80
+    depends_on:
+      - api
+      - client
+
+volumes:
+  prod-mysql-data:
+  prod-bundle-data:
+  prod-log-data:
+  prod-tmp-share:
+  prod-dist-share:
+```
+
+Vueの場合は`npm run build`した結果をnginxコンテナに共有する
+
+```yml:docker-compose.prod.yml
+  # ...
+  client:
+    build:
+      context: ./client
+      dockerfile: docker/Dockerfile.prod
+      args:
+        VUE_APP_API_URL: ${VUE_APP_API_URL}
+    volumes:
+      - prod-dist-share:/client/dist  # ← distの中身をvolume化する
+  nginx:
+    image: nginx:1.19.8
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - prod-tmp-share:/api/tmp
+      - prod-dist-share:/client/dist  # ← clientコンテナのdistの中身を/client/distに共有する
+    ports:
+      - 80:80
+    depends_on:
+      - api
+      - client
+
+volumes:
+  prod-mysql-data:
+  prod-bundle-data:
+  prod-log-data:
+  prod-tmp-share:
+  prod-dist-share:
+```
+
+
+### 秘匿情報の管理
 このレポジトリでは`.env`を公開しているが、本当はgitignoreして公開しないようにする必要がある<br>
 Railsの秘匿情報の復号化に使用する`RAILS_MASTER_KEY`やDBのパスワードなどが記載されているため
 
