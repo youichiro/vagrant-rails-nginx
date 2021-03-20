@@ -95,5 +95,6 @@ Railsの秘匿情報の復号化に使用する`RAILS_MASTER_KEY`やDBのパス�
 
 
 ### HTTPS対応
+未対応<br>
 この記事を参考にする
 - [Ubuntu 20.04でLet’s Encryptを使用してNginxを保護する方法](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04-ja)
