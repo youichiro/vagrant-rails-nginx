@@ -83,7 +83,7 @@ https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-ad
 |---|---|---|
 |起動するコンテナ|db, api, client|db, api, client, nginx|
 |起動コマンド|`docker-compose up -d`|`docker-compose -f docker-compose.prod.yml up -d`|
-|URL|vue → `http://localhost:8080`<br>rails → `http://localhost:3000`|vue → `http://example.com`<br>rails → `http://api.example.com/users`|
+|URL|vue → `http://localhost:8080`<br>rails → `http://localhost:3000/users`|vue → `http://example.com`<br>rails → `http://api.example.com/users`|
 |DBのパスワード|無し|有り|
 |Railsの起動|developmentモードで3000番ポートで起動|productionモードでソケットで起動|
 |Vueページの表示|`npm run serve`の結果|`npm run build`の結果|
