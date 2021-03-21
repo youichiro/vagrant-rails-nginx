@@ -1,5 +1,5 @@
 # vagrant-rails-vue-nginx
-docker-composeで Rails API + Vue.js の開発環境・本番環境を構築するためのサンプルコード
+docker-composeで Rails API + Vue.js の開発環境・本番環境を構築するためのサンプルコード<br>
 Vagrantで仮想サーバを立ち上げて動作確認できるようにしている
 
 ![image](https://user-images.githubusercontent.com/20487308/111879864-941a3f00-89eb-11eb-9b35-5c62b4f786a9.png)
@@ -17,8 +17,8 @@ Vagrantで仮想サーバを立ち上げて動作確認できるようにして�
 ## セットアップ
 
 ```bash
-$ git clone https://github.com/youichiro/vagrant-rails-nginx.git
-$ cd vagrant-rails-nginx
+$ git clone https://github.com/youichiro/vagrant-rails-vue-nginx.git
+$ cd vagrant-rails-vue-nginx
 
 # 仮想マシンを起動し、vagrant/init.shを実行
 $ vagrant up
@@ -33,8 +33,8 @@ $ sudo su
 # プロンプトが root@ubuntu-focal:/home/vagrant に変わる
 # 仮想マシンの中でも git clone する
 $ cd /var/app
-$ git clone https://github.com/youichiro/vagrant-rails-nginx.git
-$ cd vagrant-rails-nginx
+$ git clone https://github.com/youichiro/vagrant-rails-vue-nginx.git
+$ cd vagrant-rails-vue-nginx
 
 # docker-composeを起動する
 $ docker-compose -f docker-compose.prod.yml build
