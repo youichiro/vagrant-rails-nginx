@@ -47,7 +47,9 @@ $ docker-compose exec api bin/rails g scaffold user name:string -T
 
 ## 初期データの作成
 
-```ruby:api/db/seed.rb
+`db/seed.rb`
+
+```ruby
 User.create!(name: 'ほげ太郎1')
 User.create!(name: 'ほげ太郎2')
 User.create!(name: 'ほげ太郎3')
@@ -71,8 +73,9 @@ $ docker-compose -f docker-compose.prod.yml exec api bin/rails db:seed
 ## pumaの設定
 develomentモードなら3000番ポートで起動し、productionモードならソケットで起動する
 
+`config/puma.rb`
 
-```ruby:config/puma.rb
+```ruby
 max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
 threads min_threads_count, max_threads_count
@@ -96,7 +99,9 @@ plugin :tmp_restart
 - Gemfileの`rack-cors`の行のコメントを外して`bin/bundle install`する
 - `cors.rb`を編集して、許可するホストを環境変数で指定する
 
-```ruby:api/config/initializers/cors.rb
+`config/initializers/cors.rb`
+
+```ruby
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins ENV.fetch("RAILS_ALLOW_ORIGIN")
