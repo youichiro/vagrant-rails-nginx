@@ -22,7 +22,9 @@ $ npm install axios
 
 ## APIを叩いた結果を表示するコンポーネントの作成
 
-```vue:client/src/components/HelloWorld.vue
+`src/components/HelloWorld.vue`
+
+```vue
 <template>
   <div>
     <h1>Users</h1>
