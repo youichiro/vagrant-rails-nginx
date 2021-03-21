@@ -57,6 +57,8 @@ $ docker-compose -f docker-compose.prod.yml exec api bin/rails db:seed
 vagrantで立ち上げるOSは Ubuntu 20.04 LTS
 Vagrantfileで指定している
 
+`Vagrantfile`
+
 ```Vagrantfile
   config.vm.box = "ubuntu/focal64"
 ```
@@ -64,6 +66,8 @@ Vagrantfileで指定している
 ### 複数のネットワーク・ホスト名を用意する
 vagrant-hostsupdaterをインストールすれば複数のネットワークに対してそれぞれのホスト名を割り当てることができる<br>
 https://github.com/agiledivider/vagrant-hostsupdater#multiple-private-network-adapters
+
+`Vagrantfile`
 
 ```Vagrantfile
   config.vm.network "private_network", ip: "192.168.33.10"
@@ -96,7 +100,9 @@ nginxコンテナでリクエストを受けてRails及びVueの結果を返す�
 
 Railsの場合はpumaのソケットファイルをnginxコンテナに共有する
 
-```yml:docker-compose.prod.yml
+`docker-compose.prod.yml`
+
+```yml
   # ...
   api:
     build:
@@ -139,7 +145,10 @@ volumes:
 
 Vueの場合は`npm run build`した結果をnginxコンテナに共有する
 
-```yml:docker-compose.prod.yml
+
+`docker-compose.prod.yml`
+
+```yml
   # ...
   client:
     build:
